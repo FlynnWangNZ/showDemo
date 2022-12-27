@@ -8,5 +8,6 @@ from django.urls import re_path
 from setup_email.views import test
 
 urlpatterns = [
+    re_path(r'^$', test),
     re_path(r'^test/$', test),
 ]
