@@ -1,10 +1,14 @@
-## Show Demo Project  
-I built this project from my previous work experience.  
+README
+===========================
+
+This project was built from my previous work experience.  
 As a way to record what I have learned and done.  
 See the demo [Online](http://104.128.91.5). Database will reset daily.  
-Username: admin  
-Password: admin  
----
+
+  - username: admin
+  - password: admin
+
+****
 *I write the code from my memory and no details nor commercial info related to my previous employer*
 
 ## Functions
@@ -20,4 +24,3 @@ Password: admin
   - Jquery/Javascript/CSS 
   - Linux & Shell script (This project is deployed on my server runs CentOS)
   - Git & Github
-  - 
