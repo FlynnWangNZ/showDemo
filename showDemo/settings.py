@@ -127,3 +127,14 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_REDIRECT_URL = '/home/'
+
+# Configuration for project
+COMPONENTS = {
+    1: 'FrontWeb',
+    2: 'App-Android',
+    3: 'App-iOS',
+    4: 'GateWay',
+    5: 'MicroService',
+    6: 'AdminSite',
+    7: 'CRM'
+}
