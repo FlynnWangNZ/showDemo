@@ -5,9 +5,9 @@
 
 from django.urls import re_path
 
-from setup_email.views import test
+from setup_email.views import SetupEmailView
 
 urlpatterns = [
-    re_path(r'^$', test),
-    re_path(r'^test/$', test),
+    re_path(r'^$', SetupEmailView.as_view(), name="email"),
+    # re_path(r'^test/$', test),
 ]
