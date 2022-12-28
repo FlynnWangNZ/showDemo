@@ -24,3 +24,18 @@ See the demo [Online](http://104.128.91.5). Database will reset daily.
   - Jquery/Javascript/CSS 
   - Linux & Shell script (This project is deployed on my server runs CentOS)
   - Git & Github
+
+## Features
+  + Email page
+      + Email title and Send to will auto change while components and database file changes
+      + GetVersion button will send ajax request and react with the server
+      + Jira Issues are connected to Jira Server using related library
+      + There is a regex check with the test report
+      + Attention content relates to 'is urgent' and 'component'
+  + Decode page
+      + 1
+      + 2
+  + Jobs page
+      + 1
+      + 2
+      
