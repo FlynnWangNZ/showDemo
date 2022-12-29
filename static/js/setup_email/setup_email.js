@@ -1,3 +1,8 @@
+(() => {
+    setEmailTitleSendTo();
+})();
+
+
 $("table").on("click", ".insertRow", function (event) {
     event.preventDefault();
 
@@ -20,23 +25,89 @@ $("table").on("click", ".insertRow", function (event) {
 
     $(this).parent().parent().find("select").clone().appendTo($(this).parent().parent().next().find('td')[1]);
 
+    setEmailTitleSendTo();
 });
 
 // Remove row when delete btn is clicked
 $("table").on("click", "#deleteRow", function (event) {
     $(this).closest("tr").remove();
 
+    setEmailTitleSendTo();
 });
 
 // Get SVN version from server
 $("table").on("click", ".getVersion", function (event) {
-    const component_index = $(this).parent().parent().find("select option:selected").val();
+    const componentIndex = $(this).parent().parent().find("select option:selected").val();
     const $button = $(this);
+    $button.parent().parent().find("label").html(getVersion(componentIndex).msg);
+});
+
+// Define async ajax function to get SVN version number
+function getVersion(componentIndex) {
+    var ret = "";
     $.ajax({
-        url: "", data: {'component_index': component_index}, type: "PUT", dataType: "json", success: function (data) {
-            $button.parent().parent().find("label").html(data.msg);
-        }, error: function (data) {
+        url: "",
+        data: {'component_index': componentIndex},
+        type: "PUT",
+        dataType: "json",
+        async: false,
+        success: function (data) {
+            ret = data
+        },
+        error: function (data) {
             console.error(data);
         }
     })
+    return ret;
+}
+
+// When select changes
+$("table").on("change", "#component", function (event) {
+    setEmailTitleSendTo();
 });
+
+// Auto change email title
+function setEmailTitleSendTo() {
+    var emailTitle = "Version Release ";
+    var sendTo = "DevOpsTeam QATeam SETeam "
+    var component2EmailTeam = {
+        "1": "FrontTeam",
+        "2": "AndroidTeam",
+        "3": "iOSTeam",
+        "4": "GateWayTeam",
+        "5": "MicroServiceTeam",
+        "6": "AdminSiteTeam",
+        "7": "CRMTeam"
+    }
+    $(".component").each(function (index) {
+        emailTitle += $("option:selected", this).text() + ' ';
+        sendTo += component2EmailTeam[$("option:selected", this).val()] + ' ';
+    })
+    $("#emailTitle").text(emailTitle);
+    $("#sendTo").text(sendTo);
+}
+
+// Get database file SVN version
+$("#dbFile").on("click", function () {
+    var labelValue = "None";
+    const $sendTo = $("#sendTo");
+    var sendTo = $sendTo.text();
+    if ($(this).is(":checked")) {
+        labelValue = getVersion("0").msg;
+        sendTo += "DBA";
+    }else {
+        sendTo = sendTo.replaceAll("DBA", "");
+    }
+    $("#dbFileVersion").text(labelValue);
+    // append dba to sendTo
+    $sendTo.text(sendTo);
+});
+
+// Set attention with isUrgent
+$("#isUrgent").on("click", function(){
+    var $attention = "<div>SQL files should be executed first!</div>";
+    if($(this).is(":checked")){
+        $attention += "<div>URGENT! Please upgrade to this version ASAP</div>";
+    }
+    $("#attention").html($attention);
+})

@@ -2,62 +2,114 @@
 {% load static %}
 {% block title %}Setup Email{% endblock %}
 
+{% block style %}
+    <link href="{% static 'css/setup_email/style.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block script %}
-<script src="{% static 'js/setup_email/setup_email.js' %}"></script>
+    <script src="{% static 'js/setup_email/setup_email.js' %}"></script>
 {% endblock %}
 
 {% block content %}
     <form class="email_form">
         <table class="email_table table form-control">
-            <tr><!-- Email title. [TODO] Auto change when component changes -->
-                <td><div class="form-control-plaintext">Email Title</div></td>
-                <td><div class="form-control-plaintext" id="email_title">Default Email Title</div></td>
+            <tr><!-- Email title. [Done] Auto change when component changes -->
+                <td>
+                    <div class="form-control-plaintext">Email Title</div>
+                </td>
+                <td class="col-md-6">
+                    <div class="form-control-plaintext" id="emailTitle">Default Email Title</div>
+                </td>
             </tr>
-            <tr><!-- Send to list [TODO] Auto change when component and database changes -->
-                <td><div class="form-control-plaintext">Send To</div></td>
-                <td><div class="form-control-plaintext" id="sendto">DevOps team, QA team, SE team, </div></td>
+            <tr><!-- Send to list [Done] Auto change when component and database changes -->
+                <td>
+                    <div class="form-control-plaintext">Send To</div>
+                </td>
+                <td>
+                    <div class="form-control-plaintext" id="sendTo">DevOpsTeam QATeam SETeam</div>
+                </td>
             </tr>
             <tr><!-- Component Selection [Done] Add different components to release -->
-                <td><div class="form-control-plaintext">Component</div></td>
-                <td><select id="component" name="component" class="form-control">
+                <td>
+                    <div class="form-control-plaintext">Component</div>
+                </td>
+                <td><select id="component" name="component" class="form-control component">
                     {% for key, value in components.items %}
-                    <option value="{{ key }}">{{ value }}</option>
+                        <option value="{{ key }}">{{ value }}</option>
                     {% endfor %}
                 </select></td>
                 <td><label class="form-control">SVN version</label></td>
                 <td><input type="button" class="btn btn-success getVersion" value="GetVersion"></td>
                 <td><a class="btn btn-primary rounded-0 insertRow"><i class="fa fa-plus"></i></a></td>
             </tr>
-            <tr><!-- Database [TODO] Add multi database files -->
-                <td><div class="form-control-plaintext">Database Files</div></td>
-                <td><div class="form-control-plaintext">4</div></td>
+            <tr><!-- Database [Done] Add database files -->
+                <td>
+                    <div class="form-control-plaintext">Database Files</div>
+                </td>
+                <td>
+                    <div class="form-control-plaintext">
+                        <input type="checkbox" class="form-check-input" name="dbFile" id="dbFile">
+                        <label class="form-check-label" for="dbFile"></label>
+                    </div>
+                </td>
+                <td><label class="form-control" id="dbFileVersion">None</label></td>
             </tr>
-            <tr><!-- JIRA Issues [TODO] Add multi Jira Issues -->
-                <td><div class="form-control-plaintext">JIRA Issues</div></td>
-                <td><div class="form-control-plaintext">5</div></td>
+            <tr><!-- JIRA Issues [Done] Add multi Jira Issues -->
+                <td>
+                    <div class="form-control-plaintext">JIRA Issues</div>
+                </td>
+                <td>
+                    <div class="form-control-plaintext">
+                        <textarea class="form-control" name="jiraIssues"></textarea>
+                    </div>
+                </td>
             </tr>
-            <tr><!-- Test Report [TODO] User input http link and regex check -->
-                <td><div class="form-control-plaintext">Test Report</div></td>
-                <td><div class="form-control-plaintext">6</div></td>
+            <tr><!-- Test Report [Done] User input http link and regex check -->
+                <td>
+                    <div class="form-control-plaintext">Test Report</div>
+                </td>
+                <td>
+                    <div class="form-control-plaintext">
+                        <input class="form-control" type="text" id="reportLink" name="reportLink"
+                               placeholder="Paste Report Link Here">
+                    </div>
+                </td>
             </tr>
             <tr><!-- Tested by [Done] Radio button group -->
-                <td><div class="form-control-plaintext">Tested By</div></td>
                 <td>
-                    <input class="form-check-input" type="radio" name="tested_by" id="tested_by_dev" value="dev">
-                    <label class="form-check-label" for="tested_by_dev">Dev</label>&nbsp&nbsp&nbsp&nbsp
-                    <input class="form-check-input" type="radio" name="tested_by" id="tested_by_qa" value="qa" checked>
-                    <label class="form-check-label" for="tested_by_qa">QA</label>&nbsp&nbsp&nbsp&nbsp
-                    <input class="form-check-input" type="radio" name="tested_by" id="tested_by_se" value="se">
-                    <label class="form-check-label" for="tested_by_se">SE</label>
+                    <div class="form-control-plaintext">Tested By</div>
+                </td>
+                <td>
+                    <div class="form-control-plaintext">
+                        <input class="form-check-input" type="radio" name="tested_by" id="tested_by_dev" value="dev">
+                        <label class="form-check-label" for="tested_by_dev">Dev</label>&nbsp&nbsp&nbsp&nbsp
+                        <input class="form-check-input" type="radio" name="tested_by" id="tested_by_qa" value="qa"
+                               checked>
+                        <label class="form-check-label" for="tested_by_qa">QA</label>&nbsp&nbsp&nbsp&nbsp
+                        <input class="form-check-input" type="radio" name="tested_by" id="tested_by_se" value="se">
+                        <label class="form-check-label" for="tested_by_se">SE</label>
+                    </div>
                 </td>
             </tr>
             <tr><!-- Is Urgent [Done] Checkbox -->
-                <td><div class="form-control-plaintext">Is Urgent</div></td>
-                <td><input class="form-check-input" type="checkbox" id="is_urgent" name="is_urgent" value=""><label class="form-check-label" for="is_urgent"></label></td>
+                <td>
+                    <div class="form-control-plaintext">Is Urgent</div>
+                </td>
+                <td>
+                    <div class="form-control-plaintext"><input class="form-check-input" type="checkbox" id="isUrgent"
+                                                               name="isUrgent">
+                        <label class="form-check-label" for="isUrgent"></label></div>
+                </td>
             </tr>
-            <tr><!-- Attention [TODO] Auto change depends on 'is urgent' and 'components' -->
-                <td><div class="form-control-plaintext">ATTENTION</div></td>
-                <td style="color: red; font-weight: bold"><div class="form-control-plaintext">10</div></td>
+            <tr><!-- Attention [Done] Auto change depends on 'is urgent' and 'components' -->
+                <td>
+                    <div class="form-control-plaintext">ATTENTION</div>
+                </td>
+                <td>
+                    <div class="form-control-plaintext" id="attention" style="color: red; font-weight: bold">
+                        <div>SQL files should be executed first!</div>
+                    </div>
+                </td>
             </tr>
             <tr><!-- [TODO] submit will do a boostrap form check -->
                 <td><input type="reset" class="btn btn-warning form-control"></td>
