@@ -2,7 +2,7 @@
     setEmailTitleSendTo();
 })();
 
-
+// Insert new row of component
 $("table").on("click", ".insertRow", function (event) {
     event.preventDefault();
 
@@ -12,7 +12,7 @@ $("table").on("click", ".insertRow", function (event) {
     // Table columns
     cols += '<td></td>';
     cols += '<td></td>';
-    cols += '<td><input class="form-control version" placeholder="SVN version" required><div class="invalid-feedback">No version number</div></td>';
+    cols += '<td><input name="version" class="form-control version" placeholder="SVN version" required><div class="invalid-feedback">No version number</div></td>';
     cols += '<td><input type="button" class="btn btn-success getVersion" value="GetVersion"></td>';
     cols += '<td><button class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button</td>';
     cols += '<td><a class="btn btn-primary rounded-0 insertRow"><i class="fa fa-plus"></i></a></td>';
@@ -39,6 +39,9 @@ $("table").on("click", "#deleteRow", function (event) {
 $("table").on("click", ".getVersion", function (event) {
     const componentIndex = $(this).parent().parent().find("select option:selected").val();
     $(this).parent().parent().find(".version").val(getVersion(componentIndex).msg);
+    // [Done] set different name to svn version
+    $(this).parent().parent().find("select").attr("name", "component_" + componentIndex);
+    $(this).parent().parent().find(".version").attr("name", "version_" + componentIndex);
 });
 
 // Define async ajax function to get SVN version number
@@ -104,9 +107,9 @@ $("#dbFile").on("click", function () {
 
 // Set attention with isUrgent
 $("#isUrgent").on("click", function(){
-    var $attention = "<div>SQL files should be executed first!</div>";
+    var $attention = "SQL files should be executed first!";
     if($(this).is(":checked")){
-        $attention += "<div>URGENT! Please upgrade to this version ASAP</div>";
+        $attention += "\nURGENT! Please upgrade to this version ASAP";
     }
-    $("#attention").html($attention);
+    $("#attention").val($attention);
 });

@@ -16,7 +16,9 @@ class SetupEmailView(View):
         })
 
     def post(self, requests):
-        return JsonResponse({}, safe=False)
+        return render(requests, 'setup_email/index.html', {
+            'components': COMPONENTS
+        })
 
     def put(self, requests):
         parameters = QueryDict(requests.body)
