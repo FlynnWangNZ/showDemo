@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-    <form class="email_form">
+    <form class="email_form needs-validation" novalidate>
         <table class="email_table table form-control">
             <tr><!-- Email title. [Done] Auto change when component changes -->
                 <td>
@@ -38,7 +38,7 @@
                         <option value="{{ key }}">{{ value }}</option>
                     {% endfor %}
                 </select></td>
-                <td><label class="form-control">SVN version</label></td>
+                <td><input class="form-control version" placeholder="SVN version" required><div class="invalid-feedback">No version number</div></td>
                 <td><input type="button" class="btn btn-success getVersion" value="GetVersion"></td>
                 <td><a class="btn btn-primary rounded-0 insertRow"><i class="fa fa-plus"></i></a></td>
             </tr>
@@ -52,7 +52,7 @@
                         <label class="form-check-label" for="dbFile"></label>
                     </div>
                 </td>
-                <td><label class="form-control" id="dbFileVersion">None</label></td>
+                <td><input class="form-control" id="dbFileVersion" value="None" readonly></td>
             </tr>
             <tr><!-- JIRA Issues [Done] Add multi Jira Issues -->
                 <td>
@@ -60,7 +60,7 @@
                 </td>
                 <td>
                     <div class="form-control-plaintext">
-                        <textarea class="form-control" name="jiraIssues"></textarea>
+                        <textarea class="form-control" name="jiraIssues" required></textarea><div class="invalid-feedback">Content can not be null</div>
                     </div>
                 </td>
             </tr>
@@ -70,8 +70,9 @@
                 </td>
                 <td>
                     <div class="form-control-plaintext">
-                        <input class="form-control" type="text" id="reportLink" name="reportLink"
-                               placeholder="Paste Report Link Here">
+                        <input class="form-control" type="url" id="reportLink" name="reportLink"
+                               placeholder="Paste Report Link Here" required>
+                        <div class="invalid-feedback">Not a valid URL</div>
                     </div>
                 </td>
             </tr>
@@ -111,7 +112,7 @@
                     </div>
                 </td>
             </tr>
-            <tr><!-- [TODO] submit will do a boostrap form check -->
+            <tr><!-- [Done] submit will do a boostrap form check -->
                 <td><input type="reset" class="btn btn-warning form-control"></td>
                 <td><input type="submit" class="btn btn-primary form-control"></td>
             </tr>

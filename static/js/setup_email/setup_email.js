@@ -12,7 +12,7 @@ $("table").on("click", ".insertRow", function (event) {
     // Table columns
     cols += '<td></td>';
     cols += '<td></td>';
-    cols += '<td><label class="form-control">SVN version</label></td>';
+    cols += '<td><input class="form-control version" placeholder="SVN version" required><div class="invalid-feedback">No version number</div></td>';
     cols += '<td><input type="button" class="btn btn-success getVersion" value="GetVersion"></td>';
     cols += '<td><button class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button</td>';
     cols += '<td><a class="btn btn-primary rounded-0 insertRow"><i class="fa fa-plus"></i></a></td>';
@@ -38,8 +38,7 @@ $("table").on("click", "#deleteRow", function (event) {
 // Get SVN version from server
 $("table").on("click", ".getVersion", function (event) {
     const componentIndex = $(this).parent().parent().find("select option:selected").val();
-    const $button = $(this);
-    $button.parent().parent().find("label").html(getVersion(componentIndex).msg);
+    $(this).parent().parent().find(".version").val(getVersion(componentIndex).msg);
 });
 
 // Define async ajax function to get SVN version number
@@ -98,7 +97,7 @@ $("#dbFile").on("click", function () {
     }else {
         sendTo = sendTo.replaceAll("DBA", "");
     }
-    $("#dbFileVersion").text(labelValue);
+    $("#dbFileVersion").val(labelValue);
     // append dba to sendTo
     $sendTo.text(sendTo);
 });
@@ -110,4 +109,4 @@ $("#isUrgent").on("click", function(){
         $attention += "<div>URGENT! Please upgrade to this version ASAP</div>";
     }
     $("#attention").html($attention);
-})
+});

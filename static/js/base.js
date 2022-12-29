@@ -3,7 +3,22 @@
 (() => {
     'use strict'
 
-    feather.replace({'aria-hidden': 'true'})
+    feather.replace({'aria-hidden': 'true'});
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
 })()
 
 
@@ -29,8 +44,9 @@ var csrftoken = getCookie('csrftoken');
 function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
+
 $.ajaxSetup({
-    beforeSend: function(xhr, settings) {
+    beforeSend: function (xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
