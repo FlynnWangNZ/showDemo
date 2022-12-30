@@ -138,3 +138,55 @@ COMPONENTS = {
     6: 'AdminSite',
     7: 'CRM'
 }
+
+# log config. Users should import logging and use it immediately
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[%(levelname)s|%(asctime)s|%(pathname)s:%(lineno)d|%(process)d|%(thread)d]%(message)s',
+        },
+        'simple': {
+            'format': '[%(levelname)s|%(asctime)s]%(message)s',
+            'datefmt': '%H:%M:%S'
+        },
+    },
+    'filters': {
+
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'verbose',
+            'filename': os.path.join(BASE_DIR, 'log', 'django.log'),
+            'maxBytes': 1024 * 1024 * 10,
+            'backupCount': 10
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'root': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG'
+        }
+    }
+}
