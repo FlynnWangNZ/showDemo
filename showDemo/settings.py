@@ -129,15 +129,7 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/home/'
 
 # Configuration for project
-COMPONENTS = {
-    1: 'FrontWeb',
-    2: 'App-Android',
-    3: 'App-iOS',
-    4: 'GateWay',
-    5: 'MicroService',
-    6: 'AdminSite',
-    7: 'CRM'
-}
+COMPONENTS = ['FrontWeb', 'App-Android', 'App-iOS', 'GateWay', 'MicroService', 'AdminSite', 'CRM']
 
 # log config. Users should import logging and use it immediately
 LOGGING = {

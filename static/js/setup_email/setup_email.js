@@ -40,7 +40,6 @@ $("table").on("click", ".getVersion", function (event) {
     const componentIndex = $(this).parent().parent().find("select option:selected").val();
     $(this).parent().parent().find(".version").val(getVersion(componentIndex).msg);
     // [Done] set different name to svn version
-    $(this).parent().parent().find("select").attr("name", "component_" + componentIndex);
     $(this).parent().parent().find(".version").attr("name", "version_" + componentIndex);
 });
 
@@ -71,22 +70,14 @@ $("table").on("change", "#component", function (event) {
 // Auto change email title
 function setEmailTitleSendTo() {
     var emailTitle = "Version Release ";
-    var sendTo = "DevOpsTeam QATeam SETeam "
-    var component2EmailTeam = {
-        "1": "FrontTeam",
-        "2": "AndroidTeam",
-        "3": "iOSTeam",
-        "4": "GateWayTeam",
-        "5": "MicroServiceTeam",
-        "6": "AdminSiteTeam",
-        "7": "CRMTeam"
-    }
+    var sendTo = "DevOps QA SE "
+
     $(".component").each(function (index) {
         emailTitle += $("option:selected", this).text() + ' ';
-        sendTo += component2EmailTeam[$("option:selected", this).val()] + ' ';
+        sendTo += $("option:selected", this).val() + ' ';
     })
-    $("#emailTitle").text(emailTitle);
-    $("#sendTo").text(sendTo);
+    $("#emailTitle").val(emailTitle);
+    $("#sendTo").val(sendTo);
 }
 
 // Get database file SVN version
@@ -108,8 +99,12 @@ $("#dbFile").on("click", function () {
 // Set attention with isUrgent
 $("#isUrgent").on("click", function(){
     var $attention = "SQL files should be executed first!";
+    var emailTitle = $("#emailTitle").val();
     if($(this).is(":checked")){
+        $("#emailTitle").val("URGENT " + emailTitle);
         $attention += "\nURGENT! Please upgrade to this version ASAP";
+    }else{
+        $("#emailTitle").val(emailTitle.replaceAll("URGENT ", ""));
     }
     $("#attention").val($attention);
 });

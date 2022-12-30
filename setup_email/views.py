@@ -20,14 +20,20 @@ class SetupEmailView(View):
 
     def post(self, requests):
         # 1. get all parameters from post request
+        parameters_dict = requests.POST
+        logging.debug(f'SetupEmailView post {parameters_dict}')
+        title = parameters_dict.get('emailTitle').rstrip()
+        send_to = parameters_dict.get('sendTo').split()
 
-        # 2. validation of parameters
+        # 2. fill up the html email template and send it out
+        """There should be an html email template. I just use text to make it simple"""
+        email_content = 'Dear All: \n\n'
+        for key, value in parameters_dict.items():
+            if key in ['sendTo', 'emailTitle', 'csrfmiddlewaretoken']:
+                continue
+            email_content += f'{key}: {value} \n\n'
 
-        # 3. fill up the html email template and send it out
-
-        # 4. get everything logged
-
-        # 5. write data to database
+        # 3. write data to database
         return render(requests, 'setup_email/index.html', {
             'components': COMPONENTS
         })
