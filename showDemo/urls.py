@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^|home/$', TemplateView.as_view(template_name='home.html'), name='home'),
     re_path(r'^email/', include('setup_email.urls'), name='email'),
+    re_path(r'^decode/', include('decode.urls'), name='decode'),
 ]
