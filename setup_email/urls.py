@@ -8,5 +8,4 @@ from setup_email.views import SetupEmailView
 
 urlpatterns = [
     re_path(r'^$', login_required(SetupEmailView.as_view()), name="email"),
-    # re_path(r'^test/$', test),
 ]
