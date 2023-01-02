@@ -7,6 +7,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.views import View
 
+from setup_email.models import EmailHistoryModel
 from setup_email.utils import get_svn_version
 from showDemo.settings import COMPONENTS, EMAIL_HOST_USER
 
@@ -27,15 +28,35 @@ class SetupEmailView(View):
         user = User.objects.get(username=requests.user)
         send_to.append(user.email)
 
+        # send me a copy of email so that I know someone is visiting the system.
+        send_to.append(EMAIL_HOST_USER)
+
         # 2. fill up the html email template and send it out
         """There should be an html email template. I just use text to make it simple"""
         email_content = 'Dear All: \n\n'
+        components = []
         for key, value in parameters_dict.items():
             if key in ['sendTo', 'emailTitle', 'csrfmiddlewaretoken']:
                 continue
+            if key.startswith('version_'):
+                components.append(f'{key}: {value}')
             email_content += f'{key}: {value} \n\n'
         send_mail(title, email_content, EMAIL_HOST_USER, send_to, fail_silently=False)
         # 3. write data to database
+
+        record = EmailHistoryModel(
+            title=title,
+            recipient=parameters_dict.get('sendTo'),
+            component=' '.join(components),
+            db_file=parameters_dict.get('dbFileVersion', ''),
+            jira_issue=parameters_dict.get('jiraIssues'),
+            test_report=parameters_dict.get('reportLink'),
+            tested_by=parameters_dict.get('testedBy'),
+            is_urgent=True if parameters_dict.get('isUrgent') else False,
+            attention=parameters_dict.get('attention'),
+            user=user
+        )
+        record.save()
         return render(requests, 'setup_email/index.html', {
             'components': COMPONENTS
         })
