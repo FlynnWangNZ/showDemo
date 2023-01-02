@@ -5,7 +5,10 @@ from setup_email.models import EmailHistoryModel
 
 
 class EmailHistoryAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['title', 'user', 'modify_time']
+    list_display_links = list_display
+    list_filter = ['user']
+    search_fields = ['recipient', 'component', 'jira_issue', 'tested_by', 'is_urgent', 'user']
 
 
 admin.site.register(EmailHistoryModel, EmailHistoryAdmin)
