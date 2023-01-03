@@ -5,9 +5,9 @@ from django.shortcuts import render
 from django.views import View
 
 
-class DecodeView(View):
+class JobView(View):
     def get(self, requests):
-        return render(requests, 'decode.html', {
+        return render(requests, 'job.html', {
 
         })
 

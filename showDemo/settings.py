@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'setup_email',
     'decode',
+    'job',
 ]
 
 MIDDLEWARE = [

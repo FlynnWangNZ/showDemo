@@ -15,7 +15,7 @@ from showDemo.settings import COMPONENTS, EMAIL_HOST_USER
 class SetupEmailView(View):
     def get(self, requests):
 
-        return render(requests, 'setup_email/index.html', {
+        return render(requests, 'setup_email.html', {
             'components': COMPONENTS
         })
 
@@ -57,7 +57,7 @@ class SetupEmailView(View):
             user=user
         )
         record.save()
-        return render(requests, 'setup_email/index.html', {
+        return render(requests, 'setup_email.html', {
             'components': COMPONENTS
         })
 
