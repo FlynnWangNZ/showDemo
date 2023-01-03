@@ -1,3 +1,5 @@
+import logging
+
 from django.http import JsonResponse
 from django.shortcuts import render
 
@@ -5,6 +7,7 @@ from django.shortcuts import render
 from django.views import View
 
 from decode.models import ProjectModel
+from decode.utils import DecodeFactory
 
 
 class DecodeView(View):
@@ -19,4 +22,11 @@ class DecodeView(View):
     def post(self, requests):
         project = requests.POST.get('project')
         hex_code = requests.POST.get('hexCode')
-        return JsonResponse({"project": project, "hex_code": hex_code}, safe=False)
+        decode = DecodeFactory(project, hex_code).get_product()
+        try:
+            code_json = decode.read()
+        except Exception as e:
+            code_json = {'errMsg': e}
+            logging.exception(e)
+
+        return JsonResponse(code_json, safe=False)
