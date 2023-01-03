@@ -2,19 +2,35 @@
 {% load static %}
 
 {% block title %}
-Decode
+    Decode
 {% endblock %}
 
 {% block style %}
     <link href="{% static 'css/decode.css' %}" rel="stylesheet">
+    <link href="{% static 'css/jsonViewer.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block script %}
     <script src="{% static 'js/decode.js' %}"></script>
+    <script src="{% static 'js/jsonViewer.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-Available Soon...
+    <form class="w-100 needs-validation" novalidate>
+    {% csrf_token %}
+        <div class="py-3 mb-3 border-bottom pb-3 d-flex hexCode">
+            <select class="form-select w-25" id="project">
+                {% for project in projects %}
+                    <option value="{{ project.project_code }}">{{ project.project_name }}</option>
+                {% endfor %}
+            </select>
+            <div class="col-md-8"><input type="text" class="form-control" placeholder="HexCode" id="hexCode" required>
+            <div class="invalid-feedback">Hex Code Can Not Be Null</div></div>
+            <input type="submit" class="btn btn-primary" id="submit">
+        </div>
+    </form>
+    <div class="bg-light border rounded-3 readable" id="readable">
+    </div>
 {% endblock %}
 
 

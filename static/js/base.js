@@ -4,22 +4,25 @@
     'use strict'
 
     feather.replace({'aria-hidden': 'true'});
+
+})()
+
+function formValidation() {
+    var isValid = true;
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
 
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
         .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
+            if (!form.checkValidity()) {
+                isValid = false;
+            }
+            form.classList.add('was-validated')
 
-                form.classList.add('was-validated')
-            }, false)
         })
-})()
+    return isValid
+}
 
 
 function getCookie(name) {

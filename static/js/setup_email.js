@@ -1,5 +1,8 @@
 (() => {
     setEmailTitleSendTo();
+    $("input[type='submit']").on("click", function () {
+        return formValidation();
+    })
 })();
 
 // Insert new row of component
@@ -88,7 +91,7 @@ $("#dbFile").on("click", function () {
     if ($(this).is(":checked")) {
         labelValue = getVersion("0").msg;
         sendTo += "DBA";
-    }else {
+    } else {
         sendTo = sendTo.replaceAll("DBA", "");
     }
     $("#dbFileVersion").val(labelValue);
@@ -97,13 +100,13 @@ $("#dbFile").on("click", function () {
 });
 
 // Set attention with isUrgent
-$("#isUrgent").on("click", function(){
+$("#isUrgent").on("click", function () {
     var $attention = "SQL files should be executed first!";
     var emailTitle = $("#emailTitle").val();
-    if($(this).is(":checked")){
+    if ($(this).is(":checked")) {
         $("#emailTitle").val("URGENT " + emailTitle);
         $attention += "\nURGENT! Please upgrade to this version ASAP";
-    }else{
+    } else {
         $("#emailTitle").val(emailTitle.replaceAll("URGENT ", ""));
     }
     $("#attention").val($attention);

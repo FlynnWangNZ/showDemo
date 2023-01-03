@@ -12,6 +12,7 @@ class ProjectModel(models.Model):
     modify_time = models.DateTimeField(verbose_name='ModifyTime', auto_now_add=True)
 
     class Meta:
-        verbose_name_plural = verbose_name = 'Decode'
+        verbose_name_plural = verbose_name = 'Projects'
 
-
+    def __str__(self):
+        return self.project_name

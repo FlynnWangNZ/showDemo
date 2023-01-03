@@ -1,0 +1,8 @@
+.hexCode > * {
+    margin: 0 12px;
+}
+
+.readable {
+    margin: 0 12px;
+    min-height: 300px;
+}
