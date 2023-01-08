@@ -18,7 +18,7 @@ class DecodeBase:
         self.hex_code = hex_code
         self.head_length = 0
         self.tail_length = 0
-        self.msg_type = '65'
+        self.msg_type = ''
 
     def _is_endian(self):
         """TODO use try except to determine whether the hex code is big endian or not"""
@@ -43,6 +43,8 @@ class DecodeBase:
             content_bin = binascii.unhexlify(content_hex)
             item_format = self._set_endian_format(item_type)
             content = struct.unpack(item_format, content_bin)[0]
+            if type(content) == bytes:
+                content = content.decode()
             ret[item_name] = content
             byte_point += content_length
         return ret
@@ -59,6 +61,8 @@ class DecodeBase:
         self.head_length = self._get_hex_length(self.head_format)
         head_hex = self.hex_code[:self.head_length]
         ret = self._get_json_content(self.head_format, head_hex)
+        # specify the message type
+        self.msg_type = head_hex[:2]
         return ret
 
     def get_body_format(self) -> dict:

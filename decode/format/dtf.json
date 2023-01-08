@@ -1,5 +1,23 @@
 {
   "65": {
-    "name": "b"
+    "OrderSysID": "i",
+    "OrderLocalID": "i",
+    "UserID": "9s",
+    "ParticipantID": "4s",
+    "ClientID": "16s",
+    "InstrumentID": "16s",
+    "Direction": "c",
+    "OffsetFlag": "c",
+    "HedgeFlag": "c",
+    "StopPrice": "d",
+    "LimitPrice": "d",
+    "VolumeTotalOriginal": "b",
+    "OrderType": "b",
+    "MatchCondition": "b",
+    "MatchSession": "b",
+    "ValidThrough": "11s",
+    "MinimalVolume": "h",
+    "AutoSuspend": "?",
+    "InsertTime": "9s"
   }
 }
