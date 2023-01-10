@@ -11,7 +11,7 @@ class SourceSiteAdmin(admin.ModelAdmin):
 
 
 class JobApplicationRecordAdmin(admin.ModelAdmin):
-    list_display = ['apply_date', 'job_title', 'company_name', 'hr_email', 'source_site', 'job_detail_id']
+    list_display = ['apply_date', 'job_title', 'company_name', 'hr_email', 'source_site']
     list_display_links = list_display
     readonly_fields = ['added_by']
 

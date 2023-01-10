@@ -28,7 +28,6 @@ class JobApplicationRecordModel(models.Model):
     source_site = models.ForeignKey(SourceSiteModel, on_delete=models.CASCADE, verbose_name='Source Site')
     cv = models.FileField(verbose_name='CV')
     cover_letter = models.FileField(verbose_name='Cover Letter')
-    job_detail_id = models.IntegerField(verbose_name='Detail ID', unique=True, null=False)
     added_by = models.ForeignKey(User, verbose_name='User', on_delete=models.CASCADE)
 
     class Meta:
@@ -41,7 +40,8 @@ class JobApplicationRecordModel(models.Model):
 # Detail Table
 # ID, JobDetailID(ForeignKey), Direction(send/receive), Summary, EmailKeyword
 class ApplicationDetailModel(models.Model):
-    job_detail_id = models.ForeignKey(JobApplicationRecordModel, to_field='job_detail_id', on_delete=models.CASCADE)
+    job_detail_id = models.ForeignKey(JobApplicationRecordModel, verbose_name='Job Application ID',
+                                      on_delete=models.CASCADE)
     direction = models.IntegerField(verbose_name='Direction', choices=(
         (0, 'send'),
         (1, 'receive')
