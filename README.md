@@ -5,8 +5,8 @@ This project was built from my previous work experience.
 As a way to record what I have learned and done.  
 See the demo [Online](http://104.128.91.5). Database will reset daily.  
 
-  - username: admin
-  - password: admin
+  - username: demo
+  - password: 2wsx#EDC
 
 ****
 *I write the code from my memory and no details nor commercial info related to my previous employer*
