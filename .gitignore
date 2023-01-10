@@ -8,3 +8,5 @@ migrations
 db.sqlite3
 log/*.log
 local_settings.py
+
+media/*

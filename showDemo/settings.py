@@ -133,6 +133,9 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/home/'
 LOGIN_URL = '/admin/login/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 # Configuration for project
 COMPONENTS = ['FrontWeb', 'App-Android', 'App-iOS', 'GateWay', 'MicroService', 'AdminSite', 'CRM']
 
