@@ -33,9 +33,9 @@ See the demo [Online](http://104.128.91.5). Database will reset daily.
       + There is a regex check with the test report
       + Attention content relates to 'is urgent' and 'component'
   + Decode page
-      + 1
-      + 2
+      + Jsonviewer library is used to show data in a json format
+      + Factory design method is used on the server side for different type of projects
   + Jobs page
-      + 1
-      + 2
+      + Multi database tables are designed and used to store the valuable data
+      + Admin configuration to control how data displayed
       
