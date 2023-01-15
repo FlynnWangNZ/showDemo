@@ -22,7 +22,6 @@ class SourceSiteModel(models.Model):
 class JobApplicationRecordModel(models.Model):
     apply_date = models.DateField(verbose_name='Application Date')
     job_title = models.CharField(max_length=100, verbose_name='Job Title')
-    job_description = models.TextField(verbose_name='Job Description')
     job_link = models.URLField(verbose_name='Job Link')
     company_name = models.CharField(max_length=100, verbose_name='Company Name', unique=True, null=False)
     hr_email = models.EmailField(verbose_name='HR Email', null=True, blank=True)
