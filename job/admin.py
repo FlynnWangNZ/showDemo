@@ -17,7 +17,7 @@ class JobApplicationRecordAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
-        return queryset.filter(added_by=request.user)
+        return queryset.filter(added_by=request.user).order_by('apply_date')
 
     def save_model(self, request, obj, form, change):
         obj.added_by = request.user
