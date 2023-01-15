@@ -25,7 +25,7 @@ class JobApplicationRecordModel(models.Model):
     job_description = models.TextField(verbose_name='Job Description')
     job_link = models.URLField(verbose_name='Job Link')
     company_name = models.CharField(max_length=100, verbose_name='Company Name', unique=True, null=False)
-    hr_email = models.EmailField(verbose_name='HR Email')
+    hr_email = models.EmailField(verbose_name='HR Email', null=True, blank=True)
     source_site = models.ForeignKey(SourceSiteModel, on_delete=models.CASCADE, verbose_name='Source Site')
     cv = models.FileField(verbose_name='CV')
     cover_letter = models.FileField(verbose_name='Cover Letter')
