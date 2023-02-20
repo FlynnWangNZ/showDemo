@@ -23,4 +23,5 @@ urlpatterns = [
     re_path(r'^email/', include('setup_email.urls'), name='email'),
     re_path(r'^decode/', include('decode.urls'), name='decode'),
     re_path(r'^job/', include('job.urls'), name='job'),
+    re_path(r'^grading/', include('grading.urls'), name='grading'),
 ]

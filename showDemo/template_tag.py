@@ -15,5 +15,6 @@ def sidebar():
         {'name': 'email', 'url': '/email', 'feather': 'mail'},
         {'name': 'decode', 'url': '/decode', 'feather': 'unlock'},
         {'name': 'job', 'url': '/admin', 'feather': 'activity'},
+        {'name': 'grading', 'url': '/grading', 'feather': 'bar-chart-2'},
         {'name': 'github', 'url': 'https://github.com/FlynnWangNZ/showDemo', 'feather': 'github'}
     ]

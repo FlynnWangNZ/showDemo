@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'setup_email',
     'decode',
     'job',
+    'grading',
 ]
 
 MIDDLEWARE = [
