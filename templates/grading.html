@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block style %}
-
+    <link href="{% static 'css/grading.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block script %}
@@ -14,5 +14,31 @@
 {% endblock %}
 
 {% block content %}
+<div class="grading ">
+<select class="form-select" id="course">
+    <option disabled selected value="">Please Select Your Course</option>
+    {% for course in courses %}
+        <option value="{{ course.id }}">{{ course.name }}</option>
+    {% endfor %}
+</select>
+<hr/>
+<div class="score">
+    <table class="table">
+        <thead>
+        <th>Assignment Name</th>
+        <th>Marks in Total</th>
+        <th>Percentage</th>
+        <th>Your Score</th>
+        </thead>
 
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<hr/>
+<div class="grade row fs-2">
+    <div class="SumScore col-sm">Sum Score: <span id="sum_score">0</span></div>
+    <div class="grade col-sm">Estimated Grade: <span id="grade">D</span></div>
+</div>
+</div>
 {% endblock %}
